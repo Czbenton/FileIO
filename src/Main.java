@@ -3,29 +3,30 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final String BOWDESCRIPTIONFILE = "BowDescription.json";
+    public static final String BOW_DESCRIPTION_FILE = "BowDescription.json";
     public static Scanner scanner = new Scanner(System.in);
-    public static Bow newBow;
+//    public static Bow bow;
 
     public static void main(String[] args) throws Exception {
         JsonReadWrite jsonMethods = new JsonReadWrite();
 
+        Bow bow = null;
         try {
-            newBow = jsonMethods.readJson();
+            bow = jsonMethods.readJson(BOW_DESCRIPTION_FILE);
+            System.out.println(bow);
         } catch (FileNotFoundException e) {
+            bow = new Bow();
             System.out.println("No previous file found.\n");
         }
-
-        if (newBow != null) { System.out.println(newBow); }
 
         System.out.println("Hi there! Welcome to Benton's Archery Tournament.\n" +
                 "Please enter the following information about your bow.\n");
 
-        userInputSetAttributes();
-        jsonMethods.writeJson();
+        userInputSetAttributes(bow);
+        jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
     }
 
-    public static void userInputSetAttributes() {
+    public static void userInputSetAttributes(Bow bow) {
         System.out.println("What type of bow is it?");
         String userInputType = scanner.nextLine();
 
@@ -41,10 +42,10 @@ public class Main {
         System.out.println("How much did you pay for your bow?");
         double userInputCost = Double.parseDouble(scanner.nextLine());
 
-        newBow.setType(userInputType);
-        newBow.setBrand(userInputBrand);
-        newBow.setSize(userInputSize);
-        newBow.setMaterial(userInputMaterial);
-        newBow.setCost(userInputCost);
+        bow.setType(userInputType);
+        bow.setBrand(userInputBrand);
+        bow.setSize(userInputSize);
+        bow.setMaterial(userInputMaterial);
+        bow.setCost(userInputCost);
     }
 }

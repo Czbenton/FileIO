@@ -12,17 +12,18 @@ import java.util.Scanner;
 public class JsonReadWrite {
 
 
-    public void writeJson() throws IOException {
-        File f = new File(Main.BOWDESCRIPTIONFILE);
+    public void writeJson(String fileNAme, Bow bow) throws IOException {
         JsonSerializer serializer = new JsonSerializer();
-        String json = serializer.serialize(Main.newBow);
+        String json = serializer.serialize(bow);
+
+        File f = new File(fileNAme);
         FileWriter fw = new FileWriter(f);
         fw.write(json);
         fw.close();
     }
 
-    public Bow readJson() throws FileNotFoundException {
-        File f = new File(Main.BOWDESCRIPTIONFILE);
+    public Bow readJson(String fileName) throws FileNotFoundException {
+        File f = new File(fileName);
         Scanner s = new Scanner(f);
         s.useDelimiter("\\Z");
         String contents = s.next();
