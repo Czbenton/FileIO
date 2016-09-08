@@ -5,7 +5,6 @@ public class Main {
 
     public static final String BOW_DESCRIPTION_FILE = "BowDescription.json";
     public static Scanner scanner = new Scanner(System.in);
-//    public static Bow bow;
 
     public static void main(String[] args) throws Exception {
         JsonReadWrite jsonMethods = new JsonReadWrite();
