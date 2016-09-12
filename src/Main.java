@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
@@ -9,20 +10,39 @@ public class Main {
     public static void main(String[] args) throws Exception {
         JsonReadWrite jsonMethods = new JsonReadWrite();
 
-        Bow bow = null;
+        Bow bow;
+        boolean trySucceed = false;
         try {
             bow = jsonMethods.readJson(BOW_DESCRIPTION_FILE);
             System.out.println(bow);
-        } catch (FileNotFoundException e) {
+            trySucceed = true;
+        } catch (Exception parseFailed) {
             bow = new Bow();
             System.out.println("No previous file found.\n");
         }
 
+        if (trySucceed) {
+            File f = new File(BOW_DESCRIPTION_FILE);
+            Scanner fileScanner = new Scanner(f);
+            System.out.println("Our records indicate that your bow information may be old.\nDo you want to update the info? [yes] [no]");
+            String userInput = scanner.nextLine();
+            switch (userInput){
+                case "yes" :
+                    userInputSetAttributes(bow);
+                    jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
+                    break;
+                case "no" :
+                    System.out.println("Please come back if you want to update your information.");
+                    break;
+                default:
+            }
+        }
+        else {
         System.out.println("Hi there! Welcome to Benton's Archery Tournament.\n" +
                 "Please enter the following information about your bow.\n");
-
         userInputSetAttributes(bow);
         jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
+        }
     }
 
     public static void userInputSetAttributes(Bow bow) {
