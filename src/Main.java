@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -20,28 +19,29 @@ public class Main {
             bow = new Bow();
             System.out.println("No previous file found.\n");
         }
+        validateExistingFile_or_CreateNew(jsonMethods, bow, trySucceed);
+    }
 
+
+    private static void validateExistingFile_or_CreateNew(JsonReadWrite jsonMethods, Bow bow, boolean trySucceed) throws IOException {
         if (trySucceed) {
-            File f = new File(BOW_DESCRIPTION_FILE);
-            Scanner fileScanner = new Scanner(f);
             System.out.println("Our records indicate that your bow information may be old.\nDo you want to update the info? [yes] [no]");
             String userInput = scanner.nextLine();
-            switch (userInput){
-                case "yes" :
+            switch (userInput) {
+                case "yes":
                     userInputSetAttributes(bow);
                     jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
                     break;
-                case "no" :
+                case "no":
                     System.out.println("Please come back if you want to update your information.");
                     break;
                 default:
             }
-        }
-        else {
-        System.out.println("Hi there! Welcome to Benton's Archery Tournament.\n" +
-                "Please enter the following information about your bow.\n");
-        userInputSetAttributes(bow);
-        jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
+        } else {
+            System.out.println("Hi there! Welcome to Benton's Archery Tournament.\n" +
+                    "Please enter the following information about your bow.\n");
+            userInputSetAttributes(bow);
+            jsonMethods.writeJson(BOW_DESCRIPTION_FILE, bow);
         }
     }
 

@@ -3,7 +3,7 @@
  */
 public class Bow {
     private String type;
-    private  String brand;
+    private String brand;
     private String size;
     private String material;
     private double cost;
@@ -51,6 +51,6 @@ public class Bow {
     @Override
     public String toString() {
         return String.format("CURRENT INFORMATION:\nType of bow is: %s.  Brand of bow is: %s.  " +
-                        "Size of bow is: %s.  Bow material is: %s.  Cost of bow is: $%.2f\n",type, brand, size, material, cost);
+                "Size of bow is: %s.  Bow material is: %s.  Cost of bow is: $%.2f\n", type, brand, size, material, cost);
     }
 }

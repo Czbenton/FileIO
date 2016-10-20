@@ -1,5 +1,6 @@
 import jodd.json.JsonParser;
 import jodd.json.JsonSerializer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,7 +11,6 @@ import java.util.Scanner;
  * Created by Zach on 9/8/16.
  */
 public class JsonReadWrite {
-
 
     public void writeJson(String fileNAme, Bow bow) throws IOException {
         JsonSerializer serializer = new JsonSerializer();
